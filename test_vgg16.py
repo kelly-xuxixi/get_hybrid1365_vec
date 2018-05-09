@@ -17,13 +17,13 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
             print(image.shape)
             imgs.append(image)
             num += 1
-    while num % 64 != 0:
+    while num % 3 != 0:
         imgs.append(np.zeros([224, 224, 3]))
         num += 1
     imgs = np.stack(imgs)
     all_probs = []
-    for i in range(int(len(imgs) / 64)):
-        feed_dict = {input_tensor: imgs[i * 64: (i + 1) * 64]}
+    for i in range(int(len(imgs) / 3)):
+        feed_dict = {input_tensor: imgs[i * 3: (i + 1) * 3]}
         probs = sess.run(vgg.prob, feed_dict=feed_dict)
         all_probs.append(probs)
     all_probs = np.vstack(all_probs)
@@ -38,7 +38,7 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
 def main():
     with tf.Session() as sess:
         folder_path = 'images'
-        input_tensor = tf.placeholder("float", [64, 224, 224, 3])
+        input_tensor = tf.placeholder("float", [3, 224, 224, 3])
         vgg = vgg16.Vgg16()
         with tf.name_scope("content_vgg"):
             vgg.build(input_tensor)

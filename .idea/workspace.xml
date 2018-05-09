@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="593d992d-70c3-4939-9a99-322ac38875f8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/test_vgg16.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_vgg16.py" afterDir="false" />
-    </list>
+    <list default="true" id="593d992d-70c3-4939-9a99-322ac38875f8" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +32,8 @@
       <file leaf-file-name="test_vgg16.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_vgg16.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+            <state relative-caret-position="303">
+              <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -239,8 +237,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test_vgg16.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+        <state relative-caret-position="303">
+          <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
