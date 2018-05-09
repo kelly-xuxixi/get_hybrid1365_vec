@@ -5,14 +5,6 @@ import os
 import vgg16
 import utils
 
-img1 = utils.load_image("./test_data/tiger.jpeg")
-img2 = utils.load_image("./test_data/restaurant.jpg")
-
-batch1 = img1.reshape((1, 224, 224, 3))
-batch2 = img2.reshape((1, 224, 224, 3))
-
-batch = np.concatenate((batch1, batch2), 0)
-
 
 def get_1365_vec(vgg, input_tensor, sess, folder_path):
     files = os.listdir(folder_path)
@@ -24,7 +16,7 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
             print(image.shape)
             imgs.append(image)
     imgs = np.stack(imgs)
-    feed_dict = {input: imgs}
+    feed_dict = {input_tensor: imgs}
     probs = sess.run(vgg.prob, feed_dict=feed_dict)
     print(probs)
     utils.print_prob(probs[0], './synset.txt')
