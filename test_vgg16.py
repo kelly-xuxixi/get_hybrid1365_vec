@@ -12,7 +12,7 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
     for file in files:
         if not os.path.isdir(file) and file.endswith('.jpg'):
             print(file)
-            image = utils.load_image(file)
+            image = utils.load_image(os.path.join(folder_path, file))
             print(image.shape)
             imgs.append(image)
     imgs = np.stack(imgs)
