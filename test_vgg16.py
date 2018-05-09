@@ -19,6 +19,7 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
             num += 1
     while num % 64 != 0:
         imgs.append(np.zeros([224, 224, 3]))
+        num += 1
     imgs = np.stack(imgs)
     all_probs = []
     for i in range(int(len(imgs) / 64)):
