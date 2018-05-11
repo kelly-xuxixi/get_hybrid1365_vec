@@ -28,6 +28,7 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
         probs = sess.run(vgg.prob, feed_dict=feed_dict)
         all_probs.append(probs)
     all_probs = np.vstack(all_probs)
+    all_probs = all_probs[:len(files)]
     print(all_probs.shape)
     utils.print_prob(all_probs[0], './synset.txt')
     utils.print_prob(all_probs[1], './synset.txt')
