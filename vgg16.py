@@ -19,7 +19,7 @@ class Vgg16:
 
         self.data_dict = np.load(vgg16_npy_path, encoding='latin1').item()
         print(self.data_dict.keys())
-	print("npy file loaded")
+        print("npy file loaded")
 
     def build(self, rgb):
         """
@@ -118,13 +118,13 @@ class Vgg16:
 
     def get_conv_filter(self, name):
         print(name)
-	return tf.constant(self.data_dict[name]['weights'], name="filter")
+        return tf.constant(self.data_dict[name]['weights'], name="filter")
 
     def get_bias(self, name):
         return tf.constant(self.data_dict[name]['biases'], name="biases")
 
     def get_fc_weight(self, name):
         print(name)
-	print(self.data_dict[name]['weights'].shape)
-	return tf.constant(self.data_dict[name]['weights'], name="weights")
+        print(self.data_dict[name]['weights'].shape)
+        return tf.constant(self.data_dict[name]['weights'], name="weights")
 

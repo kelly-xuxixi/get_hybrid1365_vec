@@ -1,10 +1,9 @@
+import vgg16
+import utils
 import numpy as np
 import tensorflow as tf
 import os
 os.environ["CUDA_VISIBLE_DEVICES"]="-1"
-
-import vgg16
-import utils
 
 
 def get_1365_vec(vgg, input_tensor, sess, folder_path):
@@ -39,12 +38,14 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
 
 def main():
     with tf.Session() as sess:
+        # add a loop for all folders
         folder_path = 'images'
         input_tensor = tf.placeholder("float", [64, 224, 224, 3])
         vgg = vgg16.Vgg16()
         with tf.name_scope("content_vgg"):
             vgg.build(input_tensor)
-        get_1365_vec(vgg, input_tensor, sess, folder_path)
+        probs_for_folder = get_1365_vec(vgg, input_tensor, sess, folder_path)
+        np.savetxt(os.path.join(folder_path, 'probs.txt'), probs_for_folder)
 
 
 if __name__ == '__main__':
