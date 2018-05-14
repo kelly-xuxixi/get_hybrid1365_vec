@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 import os
 import sys
-os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+# os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 
 root_folder = '/m/data/med/frame'
@@ -53,8 +53,8 @@ def main():
         folders = os.listdir(root_folder)
         folders.sort()
         try:
-            start = sys.argv[1]
-            end = sys.argv[2]
+            start = int(sys.argv[1])
+            end = int(sys.argv[2])
         except:
             start = 0
             end = len(folders)
