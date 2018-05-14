@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 import os
 import sys
-# os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 
 root_folder = '/m/data/med/frame'
