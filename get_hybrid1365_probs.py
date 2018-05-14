@@ -3,6 +3,7 @@ import utils
 import numpy as np
 import tensorflow as tf
 import os
+import sys
 os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 
@@ -51,10 +52,19 @@ def main():
         # a loop for all folders
         folders = os.listdir(root_folder)
         folders.sort()
-        for folder in folders:
+        try:
+            start = sys.argv[1]
+            end = sys.argv[2]
+        except:
+            start = 0
+            end = len(folders)
+        for folder in folders[start:end]:
             folder_path = os.path.join(root_folder, folder)
+            prob_path = os.path.join(probs_folder, folder + '.txt')
+            if os.path.exists(prob_path):
+                continue
             probs_for_folder = get_1365_vec(vgg, input_tensor, sess, folder_path)
-            np.savetxt(os.path.join(probs_folder, folder + '.txt'), probs_for_folder)
+            np.savetxt(prob_path, probs_for_folder)
 
 
 if __name__ == '__main__':
