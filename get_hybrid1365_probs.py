@@ -6,15 +6,17 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 
+root_folder = '/m/data/med/frame'
+
+
 def get_1365_vec(vgg, input_tensor, sess, folder_path):
+    print(folder_path)
     files = os.listdir(folder_path)
     imgs = []
     num = 0
     for file in files:
-        if not os.path.isdir(file) and (file.endswith('.jpg') or file.endswith('jpeg')):
-            print(file)
+        if not os.path.isdir(file) and file.endswith('.jpg'):
             image = utils.load_image(os.path.join(folder_path, file))
-            print(image.shape)
             imgs.append(image)
             num += 1
     while num % 64 != 0:
@@ -39,14 +41,17 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
 
 def main():
     with tf.Session() as sess:
-        # add a loop for all folders
-        folder_path = 'images'
         input_tensor = tf.placeholder("float", [64, 224, 224, 3])
         vgg = vgg16.Vgg16()
         with tf.name_scope("content_vgg"):
             vgg.build(input_tensor)
-        probs_for_folder = get_1365_vec(vgg, input_tensor, sess, folder_path)
-        np.savetxt(os.path.join(folder_path, 'probs.txt'), probs_for_folder)
+        # a loop for all folders
+        folders = os.listdir(root_folder)
+        folders.sort()
+        for folder in folders:
+            folder_path = os.path.join(root_folder, folder)
+            probs_for_folder = get_1365_vec(vgg, input_tensor, sess, folder_path)
+            np.savetxt(os.path.join(folder_path, 'probs.txt'), probs_for_folder)
 
 
 if __name__ == '__main__':
