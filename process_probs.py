@@ -4,9 +4,9 @@ import os
 
 def process_probs(file_path):
     probs = np.loadtxt(file_path)
-    # print('processing ' + file_path)
+    print('processing ' + file_path)
     processed_probs = np.mean(probs, axis=0)
-    # print(processed_probs.shape)
+    print(processed_probs.shape)
     return processed_probs
 
 
