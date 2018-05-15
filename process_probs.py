@@ -2,32 +2,28 @@ import numpy as np
 import os
 
 
-def process_probs(folder_path):
-    try:
-        probs = np.loadtxt(os.path.join(folder_path, 'probs.txt'))
-    except IOError:
-        print(folder_path + ' contains no prob.txt')
-        return []
-    print('processing ' + folder_path)
+def process_probs(file_path):
+    probs = np.loadtxt(file_path)
+    # print('processing ' + file_path)
     processed_probs = np.mean(probs, axis=0)
+    # print(processed_probs.shape)
     return processed_probs
 
 
 def main():
-    probs = []
-    # loop over all folders
-    root_folder = '.'
-    folders = os.listdir(root_folder)
+    folder = '/m/data/med/probs'
+    prob_files = os.listdir(folder)
     all_probs = []
-    for folder in folders:
-        if os.path.isdir(folder):
-            folder_path = os.path.join(root_folder, folder)
-            processed_probs = process_probs(folder_path)
-            if len(processed_probs) > 0:
-                all_probs.append(processed_probs)
+    for file in prob_files:
+        file_path = os.path.join(folder, file)
+        processed_probs = process_probs(file_path)
+        if processed_probs.shape[0] == 1 and processed_probs.shape[1] == 1365:
+            all_probs.append(processed_probs)
+        else:
+            print(file_path, processed_probs.shape)
     all_probs = np.vstack(all_probs)
     print(all_probs.shape)
-    np.savetxt(os.path.join(root_folder, 'all_probs.txt'), all_probs)
+    np.savetxt(os.path.join('/m/data/med', 'mean_probs.txt'), all_probs)
 
 
 if __name__ == '__main__':
