@@ -17,7 +17,7 @@ def main():
     for file in prob_files:
         file_path = os.path.join(folder, file)
         processed_probs = process_probs(file_path)
-        if processed_probs.shape[0] == 1 and processed_probs.shape[1] == 1365:
+        if processed_probs.shape[0] == 1365:
             all_probs.append(processed_probs)
         else:
             print(file_path, processed_probs.shape)
