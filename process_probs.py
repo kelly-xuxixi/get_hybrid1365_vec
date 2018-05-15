@@ -13,6 +13,7 @@ def process_probs(file_path):
 def main():
     folder = '/m/data/med/probs'
     prob_files = os.listdir(folder)
+    prob_files.sort()
     all_probs = []
     for file in prob_files:
         file_path = os.path.join(folder, file)
