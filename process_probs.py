@@ -5,9 +5,7 @@ import os
 def process_probs(file_path):
     probs = np.loadtxt(file_path)
     print('processing ' + file_path + str(probs.shape))
-    try:
-        print(probs.shape[1])
-    except IndexError:
+    if probs.shape[0] == 1365:
         np.reshape(probs, (-1, 1365))
         # probs = probs.reshape((1, 1365))
     print(probs.shape)
