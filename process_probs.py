@@ -11,7 +11,7 @@ def process_probs(file_path):
 
 
 def main():
-    folder = '/m/data/med/probs'
+    folder = '/m/data/med/probs_bg'
     prob_files = os.listdir(folder)
     prob_files.sort()
     all_probs = []
@@ -24,7 +24,7 @@ def main():
             print(file_path, processed_probs.shape)
     all_probs = np.vstack(all_probs)
     print(all_probs.shape)
-    np.savetxt(os.path.join('/m/data/med', 'mean_probs.txt'), all_probs)
+    np.savetxt(os.path.join('/m/data/med', 'mean_probs_bg.txt'), all_probs)
 
 
 if __name__ == '__main__':
