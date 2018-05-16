@@ -8,7 +8,7 @@ import sys
 
 
 root_folder = '/m/data/med/frame'
-probs_folder = '/m/data/med/probs'
+probs_folder = '/m/data/med/probs_test'
 
 
 def get_1365_vec(vgg, input_tensor, sess, folder_path):
@@ -22,14 +22,14 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
                 image = utils.load_image(os.path.join(folder_path, file))
                 imgs.append(image)
                 num += 1
-        while num % 64 != 0:
+        while num % 32 != 0:
             imgs.append(np.zeros([224, 224, 3]))
             num += 1
         imgs = np.stack(imgs)
         print(imgs.shape)
         all_probs = []
-        for i in range(int(len(imgs) / 64)):
-            feed_dict = {input_tensor: imgs[i * 64: (i + 1) * 64]}
+        for i in range(int(len(imgs) / 32)):
+            feed_dict = {input_tensor: imgs[i * 32: (i + 1) * 32]}
             probs = sess.run(vgg.prob, feed_dict=feed_dict)
             all_probs.append(probs)
         all_probs = np.vstack(all_probs)
@@ -45,7 +45,7 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
 
 def main():
     with tf.Session() as sess:
-        input_tensor = tf.placeholder("float", [64, 224, 224, 3])
+        input_tensor = tf.placeholder("float", [32, 224, 224, 3])
         vgg = vgg16.Vgg16()
         with tf.name_scope("content_vgg"):
             vgg.build(input_tensor)
