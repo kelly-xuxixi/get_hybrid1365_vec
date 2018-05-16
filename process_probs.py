@@ -5,6 +5,10 @@ import os
 def process_probs(file_path):
     probs = np.loadtxt(file_path)
     print('processing ' + file_path)
+    try:
+        tmp = probs[1]
+    except IndexError:
+        probs.shape = (1, len(probs))
     processed_probs = np.mean(probs, axis=0)
     print(processed_probs.shape)
     return processed_probs
