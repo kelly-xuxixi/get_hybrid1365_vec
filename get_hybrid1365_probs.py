@@ -7,14 +7,19 @@ import sys
 # os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 
-root_folder = '/m/data/med/frame'
-probs_folder = '/m/data/med/probs_test'
+root_folder = '/m/data/med/frame_bg'
+probs_folder = '/m/data/med/probs_bg'
 
 
 def get_1365_vec(vgg, input_tensor, sess, folder_path):
     print(folder_path)
     try:
         files = os.listdir(folder_path)
+        if len(files) < 4:
+            file = open('error.txt', 'a')
+            file.write(folder_path)
+            file.close()
+            return
         imgs = []
         num = 0
         for file in files:
@@ -23,7 +28,7 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
                 imgs.append(image)
                 num += 1
         while num % 32 != 0:
-            imgs.append(np.zeros([224, 224, 3]))
+            imgs.append(np.ones([224, 224, 3]))
             num += 1
         imgs = np.stack(imgs)
         print(imgs.shape)
@@ -35,9 +40,9 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
         all_probs = np.vstack(all_probs)
         all_probs = all_probs[:len(files)]
         print(all_probs.shape)
-        utils.print_prob(all_probs[0], './synset.txt')
-        utils.print_prob(all_probs[1], './synset.txt')
-        utils.print_prob(all_probs[2], './synset.txt')
+        # utils.print_prob(all_probs[0], './synset.txt')
+        # utils.print_prob(all_probs[1], './synset.txt')
+        # utils.print_prob(all_probs[2], './synset.txt')
         return all_probs
     except Exception as e:
         print(e)
