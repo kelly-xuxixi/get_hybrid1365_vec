@@ -16,11 +16,6 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
     try:
         files = os.listdir(folder_path)
         print(len(files))
-        if len(files) < 4:
-            file = open('error.txt', 'a')
-            file.write(folder_path)
-            file.close()
-            return
         imgs = []
         num = 0
         for file in files:
@@ -47,7 +42,9 @@ def get_1365_vec(vgg, input_tensor, sess, folder_path):
         return all_probs
     except Exception as e:
         print(e)
-        pass
+        file = open('error.txt', 'a')
+        file.write(folder_path)
+        file.close()
 
 
 def main():
@@ -71,7 +68,13 @@ def main():
             if os.path.exists(prob_path):
                 continue
             probs_for_folder = get_1365_vec(vgg, input_tensor, sess, folder_path)
-            np.savetxt(prob_path, probs_for_folder)
+            try:
+                np.savetxt(prob_path, probs_for_folder)
+            except Exception as e:
+                print(e)
+                file = open('error.txt', 'a')
+                file.write(folder_path)
+                file.close()
 
 
 if __name__ == '__main__':
