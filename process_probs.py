@@ -9,6 +9,7 @@ def process_probs(file_path):
         tmp = probs[1]
     except IndexError:
         probs.shape = (1, len(probs))
+    print(probs.shape)
     processed_probs = np.mean(probs, axis=0)
     print(processed_probs.shape)
     return processed_probs
