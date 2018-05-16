@@ -6,7 +6,7 @@ def process_probs(file_path):
     probs = np.loadtxt(file_path)
     print('processing ' + file_path + str(probs.shape))
     try:
-        tmp = probs[1]
+        tmp = probs.shape[1]
     except IndexError:
         np.reshape(probs, (-1, 1365))
         # probs = probs.reshape((1, 1365))
